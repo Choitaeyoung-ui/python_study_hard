@@ -1,211 +1,205 @@
 '''
-1. 생성자(constructor)
-'''
+chapter09_classes 우클릭 -> new -> python file -> main 입력
 
+1. 클래스 도입의 필요성
+'''
+# 매개 변수가 6개인 함수를 하나 정의합니다
+def student_info(name, department, professor, phone, address, grade):
+    print(name)
+    print(department)
+    print(professor)
+    print(phone)
+    print(address)
+    print(grade)
+
+name1 = "안근수"
+department1 = "영어교육과"
+professor1 = "David"
+phone1 = "010-7445-7113"
+address1 = "부산광역시 연제구"
+grade1 = "A"
+
+# 함수 호출
+student_info(name1, department1, professor1, phone1, address1, grade1)
+'''
+지금까지 배운 함수와 매개변수, 그리고 argument를 통해 6개의 변수를 처리했습니다. 하지만
+만들어야 할 변수의 개수가 많고, 학생 한 명당 매개변수가 6개라면, 학생이 100명일 경우 600개의
+변수를 처리할 필요가 있습니다.
+'''
+student_info(grade="B",
+             address="서울특별시 종로구",
+             phone="010-1234-5678",
+             professor="John",
+             department="computer science",
+             name="김일"
+             )                      # keyword argument
+
+# name2, ... grade2라는 변수들을 선언하고, 거기에 여러분들의 정보를 입력한 뒤
+# keyword argument를 통해서 student_info() 함수를 호출하시오.
+
+name2 = "김이"
+department2 = "기계공학과"
+professor2 = "최이"
+phone2 = "010-9876-5432"
+address2 = "경상남도 양산시"
+grade2 = "A+"
+
+# keyword argument를 적용한 함수 호출
+student_info(name=name2, department=department2, professor=professor2, phone=phone2, address=address2, grade=grade2)
+
+'''
+이상의 상황들(변수에 각각 데이터를 대입한 후에 함수의 argument로 사용하거나, 혹은 데이터를 직접 argument에 등록)을
+벗어나기 위해 클래스와 객체 개념을 도입합니다.
+
+class란? : 객체를 만드는 도구 - 설계도 / 틀 / 청사진
+
+    자동차 설계도 -> 클래스
+    설계도를 통해 생성된 자동차들 -> 객체
+    
+    같은 설계도로 만든 자동차라 하더라도 서로 다른 옵션을 가질 수 있습니다.
+    마찬가지로 같은 클래스로 만든 객체라 하더라도 서로 다른 값을 가질 수 있습니다.
+    
+    인스턴스(instance) 역시 클래스를 이용해서 생성한 객체를 가리키는 용어입니다.
+    객체와 인스턴스는 그 둘을 바라 보는 관점의 차이로 볼 수 있습니다.
+    
+    1. '자동차 설계도'로 만든 자동차는 객체(object)입니다.
+    2. 자동차는 자동차 설계도의 인스턴스(instance)입니다.
+    
+1. 클래스 정의
+    클래스를 작성하는 것을 클래스 정의라고 합니다 -> 함수 정의를 생각하시면 됩니다.
+    
+형식 :
+
+class 클래스명(대문자로시작):
+    본문
+--------------------------
+객체생성형식 :                                -> 함수 호출을 생각하시면 일부 비슷합니다.
+
+객체이름 = 클래스명()
+'''
+# 클래스 정의 형식 예시
+class WaffleMachine:    # 클래스명은 대문자로 시작하고, Pascal Case로 표기함. python에서 변수는 snake_case
+        pass            # 나중에 코드를 작성하겠다는 의미로 이 경우 실행시켜도 오류가 나지 않음
+
+# 객체 생성 예시
+waffle = WaffleMachine()    # 소괄호()가 중요합니다 추후 사용 예정
+print(waffle)
+'''
+print(waffle)을 실행시켰을 때 <__main__.WaffleMachine object at 0x000001D3D89AE180>에서 object라고
+표기된 점을 미루어 waffle은 WaffleMachine의 객체임을 확인할 수 있음.
+
+클래스의 구성
+
+1. 클래스의 기본 구성
+    객체를 만들어내는 클래스는 객체가 가져야 할 구성 요소를 지닙니다.
+    객체를 생성하기 위해서는 클래스는 객체가 가져야 할 '값'과 '기능'을 지녀야 합니다.
+    
+    값 = 속성(attribute)
+    기능 = 메서드(method)
+    
+    클래스를 구성하는 변수는 두 가지로 구분 됩니다.
+        1) 클래스 변수 : 클래스를 기반으로 생성된 모든 인스턴스들이 공유하는 변수
+        2) 인스턴스 변수 : 인스턴스 들이 개별적으로 가지는 변수
+        
+    메서드는 특징에 따라서
+        1) 클래스 메서드
+        2) 정적 메서드
+        3) 인스턴스 메서드
+        
+    인스턴스 변수 : 클래스를 기반으로 만들어지는 모든 인스턴스들이 각각 따로 저장하는 변수를 의미
+        모든 인스턴스 변수는 self라는 키워드를 앞에 붙여준다.
+    인스턴스 메서드 : 인스턴스 변수를 사용하는 메서드
+        인스턴스 변수값에 따라서 각 인스턴스마다 다르게 동작됩니다.
+        인스턴스 메서드는 첫 번째 매개변수로 self를 추가해야 합니다.
+'''
 # 클래스 정의
-# class Candy:
-#     def set_info(self, shape, color):
-#         self.shape = shape
-#         self.color = color
-#
-#     def display_info(self):
-#         print(f"사탕의 모양은 {self.shape}이고, 색깔은 {self.color}입니다")
-#
-# # 객체 생성
-# satang = Candy()
-# satang.set_info("구형", "갈색")
-# satang.display_info()
-'''
-    satang이라는 인스턴스는 생성된 '이후'에 set_info() 매서드를 호출하여 "구형" 모영의
-    "갈색"이라는 속성(attribute)을 갖게 됩니다.
-    
-    satang 인스턴스의 생성 과정
-        1. 값이 없는(속성에 값이 대입되어있지 않은) 인스턴스를 생성
-        2. 값을 저장할 수 있는 매서드 호출
-    
-    그렇다면 처음부터 값이 있는 인스턴스를 생성하면 코드라인이 줄어들지 않을까.
-        이에 대한 해답이 생성자라는 개념이고,
-        C / Java의 경우의 생성자는 클래스명과 동일한데, 또 Python만 이상한 방식으로 만듭니다.
-        -> __init__() 라는 매서드
-    
-    __init__()매서드(생성자)는 인스턴스가 생성될 때 '자동으로 호출' 되기 때문에 인스턴스 변수의
-    '초기화' 용도로 사용, 즉 값이 있는 인스턴스를 생성할 수 있다는 의미입니다.
-    '객체 생성과 동시에' 생성자가 호출됨 -> 초기값을  작성할 때 사용한다는 의미
-    
-    형식 :
+class Person:
+    # chapter06_functions부분 참조하는데 -> call2()
+    def set_info(self, name, age, tel, address):        # 클래스 내부에 def를 사용하면 method로 정의됨.
+        self.name = name
+        self.age = age
+        self.tel = tel
+        self.address = address          # self는 인스턴스 메서드에 항상 있어야 하는 것으로
+                                        # 아직 인스턴스를 생성하지 않았기 때문에 인스턴스 이름이 없습니다.
+                                        # 추후에 인스턴스를 생성하게 되면 인스턴스명.name 등으로 치환됩니다.
+    # call1() / 매개변수 없음 return 없음
+    def display_info(self):
+        print(f"이름 : {self.name}")
+        print(f"나이 : {self.age}")
+        print(f"연락처 : {self.tel}")
+        print(f"주소 : {self.address}")
 
-class 클래스명:
-    def __init__(self, shape, color):
-        self.shape = shape
-        self.color = color   
-'''
-# class Candy2():
-#
-#     # 생성자 정의
-#     def __init__(self, shape, color):
-#         self.shape = shape
-#         self.color = color
-#
-#     def display_info(self):
-#         print(f"사탕의 모양은 {self.shape}이고, 색깔은 {self.color}입니다")
-#
-# satang2 = Candy2("정육면체", "흰색")  # 이 부분이 달라졌죠.
-# satang2.display_info()
+    # call3() / 매개 변수 없음 return 있음
+    def display_info2(self):
+        return f"제 이름은 {self.name} 이고, {self.age} 살입니다.\n연락처는 {self.tel} 인데, {self.address} 에 살고 있습니다."
 
-'''
-이상에서 주목해야 할 점은 satang 인스턴스의 satang2 인스턴스의 생성 방식의 차이입니다.
 
-2. 소멸자(Destructor)
-    인스턴스가 생성될 때 자동으로 생성되는 생성자와 마친가지로 인스턴스가 소멸될 때 호출되는 매서드
-    이를 소멸자라고 하며, 소멸자를 정의하는 매서드는 __del__()
-'''
-# class Sample:
-#
-#     # 생성자 정의
-#     def __int__(self):
-#         print(f"인스턴스가 생성되었습니다.")    # 생성자가 생성할 때 속성에 값만 대입하는 게 아니라 출력문을 삽입할 수도 있음.
-#
-#     def __del__(self):
-#         print(f"인스턴스가 소멸되었습니다.")
 
 # 객체 생성
-# sample = Sample()
-#
-# del sample      # del 객체명으로 소멸자를 원하는 시기에 호출할 수 있음. -> 예를 들어 일단 객체 소멸 시킴
+# person01 = Person()
+# print(person01)     # 객체명으로 그대로 출력할 수 없음 -> 주소값만 출력
+# person01.set_info("안근수", 38, "010-7445-7113", "부산광역시 연제구")
+# person01.display_info()  # 클래스에서 정의한 method 사용 -> 메서드 호출 방식 객체명.메서드명()
 
-# 여기 부분에 추가적인 로직을 작성하여 더 프로그램이 진행된 후에 프로그램이 전체 종료가 이루어질 수 있음.
+# person02 객체를 생성하시고, person02.set_info()를 활용하여 여러분 이름 나이 연락처 주소를 입력하고
+# display_info2()(call3()유형으로 작성)를 정의하여 다음 실행 예와 같이 출력되도록 작성하시오.
+# 실행 예
+# 제 이름은 ____ 이고, ____ 살입니다.
+# 연락처는 _____ 인데, ____ 에 살고 있습니다.
+# 코드 실행
+# print(person02.display_info2())
+
+# person02 = Person()     # 객체 생성은 완료
+# person02.set_info("김이", 20, "010-1234-5678", "서울특별시 마포구")
 #
-# print("프로그램이 종료되었습니다.")
+# # method의 정의는 class 내부에서 이루어져야 합니다.
+# person02.display_info()
+# print(person02.display_info2())
+
 '''
-기본 예제
+응용 예제 
 
-생성자를 이용해서 용량을 가진 usb 인스턴스를 만드는 프로그램을 작성하시오.
+다음 지시사항을 읽고 책 제목과 저자 정보를 저장할 수 있는 Book 클래스를 생성하세요 -> 객체도 생성하고, 실행 예를 구현하세요.
+1. 다음과 같은 방법으로 book1과 book2 인스턴스를 생성하세요.
 
-지시사항
-1. 클래스 USB를 정의할 것
-2. 생성자를 정의하여 매개변수로 capacity를 받을 것
-3. get_info() 매서드를 정의할 것
+book1 = Book()
+book2 = Book()
 
-main 단계 코드
-usb = USB(64)
-usb.get_info()
+2. set_info(self, title, author)를 통해 책 제목을 입력하세요.
+
+3. display_info()를 통해 실행 예와 같이 출력되도록 작성하세요.
 
 실행 예
-64GB USB
+책 제목 : 파이썬
+책 저자 : 민경태
+책 제목 : 어린왕자
+책 저자 : 생텍쥐페리
 '''
-# class USB:
-#     def __int__(self, capacity):
-#         self.capacity = capacity
-#
-#     # 3번 지시 사항
-#
-#     def get_info(self):
-#         print(f"{self.capacity}GB USB")
-#
-# # 객체 생성 및 get_info() 매서드 호출
-# usb = USB(64)
-# usb.get_info()
+class Book:
+    def set_info(self, title, author, stock):
+        self.title = title
+        self.author = author
+        self.stock = stock
 
+    def display_info(self):
+        print(f"책 제목 : {self.title}\n책 저자 : {self.author}")
+# 여러분들은 클래스 내부에 method들을 정의하셔야 합니다.
 
-'''
-생성자와 소멸자를 이용하여 서비스 안내 메시지를 출력하는 프로그램을 작성하시오.
+# 객체 생성
+book1 = Book()
+book2 = Book()
 
-class Service를 정의하고, 생성자를 통해 매개변수를 service로 받고, print() 매서드를 생성자와 소멸자 내에 작성하시오.
+book1.set_info("파이썬", "민경태", 3)
+book2.set_info(author= "생텍쥐페리", title= "어린왕자", stock=10)      # keyword argument
+book1.display_info()
+book2.display_info()
 
-main 단계에서의 작성
-s = Service("길 안내")
-del s
+# 특정 객체의 속성값을 확인하는 방법 -> 객체명.속성명
+print(book1.title)
+# 그러면 특정 속성값만 꺼내는 이유
+print(book1.stock + 2)
 
-실행 예 
-길 안내 Service가 시작되었습니다.
-길 안내 Service가 종료되었습니다.
-'''
-# class Service:
-#     def __int__(self,service):
-#         self.service = service
-#         print(f"{self.service} Service가 시작되었습니다.")
-#
-#     def __del__(self):
-#         print(f"{self.service} Service가 종료되었습니다..")
-#
-# s = Service("길 안내")
-# # del s
-# print("프로그램이 종료되는 시점")
-# del s       # 종료되는 시점을 조절할 수 있음.
+# 어떤 method를 사용해서 속성에 값을 대입하고, 어떤 method를 사용하여 정보를 출력할지 코드를 작성하셔야 합니다.
 
-
-'''
-응용 예제
-
-1. 다음 지시 사항을 읽고 이름을 저장하는 Person 클래스를 생성하시오.
-
-지시사항
-
-1. 다음과 같은 방법으로 man과 woman 인스턴스를 생성하시오.
-man = Person("james")
-woman = Person("emily")
-2. man과 woman 인스턴스가 생성되면 다음과 같은 메시지를 출력할 수 있도록 작성하시오.
-james is born.
-emily is born.
-
-3. 다음과 같은 방버으로 man 인스턴스를 삭제하시오.
-del man
-
-4. 인스턴스가 삭제되면 다음과 같은 메시지를 출력할 수 있도록 작성하시오.
-james is dead.
-
-'''
-# class Person:
-#     def __int__(self, name):
-#         self.name = name
-#         print(f"{self.name} is born.")
-#
-#     def __del__(self):
-#         print(f"{self.name} is dead.")
-#
-# man = Person("james")
-# woman = Person("emily")
-#
-# del man
-#
-# print("james is dead.")
-
-'''
-예제 1. 
-    학생들의 성적을 관리하는 Student 클래스를 작성하시오. 이 클래스는 
-    학생의 이름, 학번, 성적을 인스턴스 변수로 갖습니다.
-    
-    지시사항 
-        1) Student 클래스를 정의하고 생성자를 통해 name, student_id, grade을 초기화 하시오.
-        2) 학생의 프로필을 출력하는 인스턴스 매서드 print_profile()를 작성하시오.(call1()타입으로 : 매개변수x 리턴x)
-        3) 학생의 성적을 변경할 수 있는 인스턴스 매서드 set_grade()를 작성하시오.
-            -> '이부분이 고민해볼만한 요소입니다 // set_info() 매서드를 검색해보세요 crtl + shift + f 눌러서
-        4) 세 명의 학생 인스턴스를 생성하고, 각 학생의 정보를 출력한 다음,
-            성적을 변경하고 다시 출력하시오.
-            
-    student1 = Student("김철수",20250001, "A")  
-    student2 = Student("이영희",20250002, "B")        
-    student3 = Student("박민지",20250003, "C")        
-    
-    실행 예
-    
-    학생 이름 : 김철수
-    학번 : 20230001
-    성적 : A
-    
-    student2 / student3도 출력하시오,
-    
-    이후 student1 성적을 A+ / student2는 A / student3은 B+로 성적을 변경하고
-    
-    다시 print_profile을 적용하여 출력하시오.
-    
-'''
-class Student:
-
-    def __int__(self, name, student_id, grade):
-        self.name = name
-        self.student_id = student_id
-        self.grade = grade
-
-
-
+# chapter09_class 우클릭 -> new -> python package -> constructor
+# constructor 우클릭 -> new -> python file -> main

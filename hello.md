@@ -13,7 +13,7 @@ notion에서도 동일하게 작동하므로
 
 google에서
 
-markdown lauguage를 검색하시면
+markdown language를 검색하시면
 
 필요한 노트 정리법에 대한
 
@@ -23,7 +23,7 @@ markdown lauguage를 검색하시면
 
 1. 클래스
 2. 생성자
-3. 매서드
+3. 메서드
 
 관련 수업을 할 예정입니다.
 
@@ -40,4 +40,14 @@ git push
 
 를 순서대로 복사 붙여넣기 하시면 됩니다.
 
+
+20250213
+
+가장 상위 폴더 우클릭 -> new -> python package
+-> chapter09_classes
+-> chapter10_coffee_machine_pop
+
+chapter10_coffee_machine_pop -> new -> python package
+-> pop_version -> 우클릭 -> new -> python file
+-> main
 
