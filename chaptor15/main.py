@@ -113,17 +113,20 @@ class Car:
 
 
 class Hybrid(Car):
-    max_amuont = 30
+    max_amount = 30
     # 생성자
     def __int__(self, oil, amount):
         super().__int__(oil)
         self.amount = amount
 
     def charge(self):
-        pass
+        if amo <= 0:
+            return
+        self.amount
 
     def hybrid_info(self):
         super().car_info()                     # super().__init__()에서 볼수 있듯이
+        #print(f"현재 주유 상태 : {self.oil}")
         print(f"현재 충전 상태 : {self.amount}")  # super().을 통해서 부모 클래스의 매서드를 호출 가능
 
 

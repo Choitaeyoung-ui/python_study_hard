@@ -87,5 +87,5 @@ git commit -m "feat: 20250220 turtle started"
 git push
 
 git add .
-git commit -m "feat: 20250225 exception"
+git commit -m "feat: 20250225 "
 git push
