@@ -65,9 +65,10 @@ table.add_row(pokemon_data[3])
 table.add_row(pokemon_data[4])
 table.add_row(pokemon_data[5])
 table.add_row(pokemon_data[6])
+# 38분에 풀이합니다 😀
 
 # 일반 for 문
-for i in range (len(pokemon_data)):     # 26 0번지 ~ 25번지
+for i in range(len(pokemon_data)):      # 26 0번지 ~ 25번지
     table.add_row(pokemon_data[i])
 
 # 데이터를 그대로 집어넣는 것을 하드코딩
@@ -76,41 +77,5 @@ for i in range (len(pokemon_data)):     # 26 0번지 ~ 25번지
 # for pokemon in pokemon_data:
 #     table.add_row(pokemon)
 
+
 print(table)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
